@@ -1,6 +1,6 @@
 console.log('Clase 01 - Front II');
 /* ------------------------------- FUNCION 01 ------------------------------- */
-function inciarJuego(){
+function iniciarJuego(){
     // Saludo al usuario
     alert('Bievenido al Juego del Piedra Papel o Tijera');
     // Solicito el nombre del usuario
@@ -11,7 +11,7 @@ function inciarJuego(){
     return nombre;
 }
 // Constante Global
-const nombreJugador = inciarJuego();
+const nombreJugador = iniciarJuego();
 
 /* -------------------------------------------------------------------------- */
 /*                          CONSIGNA MESA DE TRABAJO                          */
