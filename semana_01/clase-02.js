@@ -21,4 +21,51 @@ function pedirJugada(){
 /*                                  FUNCION 3                                 */
 /* -------------------------------------------------------------------------- */
 // 👇 Obtengo un número randon entre 1 y 3 
+function jugadaRandom(){
+    let numero = parseInt( Math.random() * 3 + 1 );
+    console.log('La Compu Juega con ' + numero);
+    return numero;
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                  FUNCION 4                                 */
+/* -------------------------------------------------------------------------- */
+// 👇 Retorna el resultado del juego
+function compararJugada(){
+                            //           0                       1              2
+    const resultados_posible = ['¡Felicitaciones Ganaste!', 'Empate', 'Perdiste, Segui participando'];
+    const eleccionUsuario = pedirJugada();
+    const eleccionCompu = jugadaRandom();
+
+    let resultado;
+    //  1.Piedra 2.Papel y 3.Tijera
+    // Si empataron
+    if( eleccionCompu === eleccionUsuario  ){
+        resultado = resultados_posible[1];
+    } else if( 
+        ( eleccionUsuario === 1 && eleccionCompu === 2) ||
+        ( eleccionUsuario === 2 && eleccionCompu === 3) ||
+        ( eleccionUsuario === 3 && eleccionCompu === 1) 
+     ){
+        resultado = resultados_posible[2];
+    } else {
+        resultado = resultados_posible[0];
+    }
+
+    return resultado;
+}
+
+
+let resultadoPartida = compararJugada();
+
+function recibirResultado(resultado){
+    
+}
+/* -------------------------------------------------------------------------- */
+/*                          CONSIGNA MESA DE TRABAJO                          */
+/* -------------------------------------------------------------------------- */
+// 1- Crear una función que reciba como parametro un texto (la frase de resultado de la partida).
+// 2- La función debe mostrar por consola el resultado de la partida.
+// 3- A su vez debe mostrar al usuario una alerta con el resutado de la partida.
+// 4- Finalmente, si el resultado fue una derrota debe mostrarle al usuario un mensaje de aliento para desearle suerte en la próxima oportunidad.
 
