@@ -56,9 +56,14 @@ function compararJugada(){
 }
 
 
-let resultadoPartida = compararJugada();
+/* let resultadoPartida = compararJugada(); */
 
 function recibirResultado(resultado){
+    console.log('El resultado es ' + resultado);
+    // alert(resultado);
+    if(  resultado == 'Perdiste, Segui participando'){
+        alert(' Esta vez perdiste, las proxima será :)');
+    }
     
 }
 /* -------------------------------------------------------------------------- */

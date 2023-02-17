@@ -3,15 +3,18 @@ console.log('Clase 01 - Front II');
 function iniciarJuego(){
     // Saludo al usuario
     alert('Bievenido al Juego del Piedra Papel o Tijera');
+    let nombre;
+    do {
+        nombre = prompt('¿Cual es tu nombre?');
+        console.log('Bienvenido ' + nombre);
+        //        false           true           -> false 
+    } while( !isNaN(nombre) || nombre.trim().length <= 3 );
     // Solicito el nombre del usuario
-    let nombre = prompt('¿Cual es tu nombre?');
-
-    console.log('Bienvenido ' + nombre);
 
     return nombre;
 }
 // Constante Global
-const nombreJugador = iniciarJuego();
+// const nombreJugador = iniciarJuego();
 
 /* -------------------------------------------------------------------------- */
 /*                          CONSIGNA MESA DE TRABAJO                          */
