@@ -134,3 +134,7 @@ footer {
     text-transform: uppercase;
     color: #e4f587;
 } */
+
+.especial {
+    border: 2px solid rgb(212, 94, 94)
+}
