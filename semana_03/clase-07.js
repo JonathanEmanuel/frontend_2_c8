@@ -1,4 +1,3 @@
-console.log(albumesFamosos);
 /* ------------------- FUNCION 01 - Solictamos el usuario ------------------- */
 function getUser(){
     const nameUser = document.querySelector('#nombreUsuario');
@@ -34,7 +33,7 @@ function renderizarAlbumes(listado){
 
 
 
-getUser();
+//getUser();
 renderizarAlbumes(albumesFamosos);
 
 /* ----------------------------- MESA DE TRABAJO ---------------------------- */
