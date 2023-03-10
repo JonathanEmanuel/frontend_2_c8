@@ -67,3 +67,19 @@ renderizarNoticias();
 // 3- El resultado debe ser el mismo que en el caso anterior pero vamos a implementar el método innerHTML para insertar la plantilla creada.
 // Ejemplo: si quiero insertar un titulo en el body, haría los siguiente:
 // document.querySelector('body').innerHTML += `<h1>Nuevo Título</h1>`;
+
+
+
+/* -------------------------------------------------------------------------- */
+/*                                    EXTRA                                   */
+/* -------------------------------------------------------------------------- */
+
+const btn = document.querySelector('button');
+btn.addEventListener('click', function(){
+
+    console.log('Ahora cambiamos el tema')
+    const body = document.querySelector('body');
+
+    body.classList.toggle('dark');
+
+})
