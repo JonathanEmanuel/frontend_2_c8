@@ -36,10 +36,13 @@ const estadosErrores = {
 /*                    FUNCION 01 MUESTRA ERRORES AL USUARIO                   */
 /* -------------------------------------------------------------------------- */
 function mostrarErrores(){
+
     if(  estadosErrores.email == true){
         emailError.classList.add('visible');
+        console.log('Email No valido');
     } else {
         emailError.classList.remove('visible');
+        console.log('Email Valido');
 
     }
 }
@@ -58,6 +61,23 @@ formulario.addEventListener('change', function() {
 })
 
 
+// Si sale la validación del email mejor
+// 💡 .includes(' ') 
+function validacionEmail(email){
+
+}
+
+
+
+// Si no hay errores retorna false
+function validarRol(rol){
+    if( rol == ''){
+        return true;
+    } else {
+        return false;
+    }
+}
+
 
 // false -> No hay errores
 function validarTerminos(terminos){
@@ -68,3 +88,12 @@ function validarTerminos(terminos){
         return true;
     }
 }
+
+
+/* ----------------------------- MESA DE TRABAJO ---------------------------- */
+/* -------------------------------------------------------------------------- */
+/*                [5] FUNCION: Formulario completado con éxito                */
+/* -------------------------------------------------------------------------- */
+// Esta funcion se va a encargar de realizar la redirección cuando el formulario se complete correctamente.
+// Para eso debera cumplir con los siguientes requerimientos.
+// 1 - Deshabilitar el boton del formulario.
