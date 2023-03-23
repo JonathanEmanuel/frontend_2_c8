@@ -137,6 +137,31 @@ function consultaAsincrona(url){
 //  llegar al mismo resultado utilizando .map()
 // Muchos éxitos!
 
+
+
 function renderizarElementos(listado){
     // desarrollar la funcion 👇
+    const areaComentarios = document.querySelector('.comentarios');
+
+/*     listado.forEach(item => {
+           areaComentarios.innerHTML += // html
+           ` <div class="comentario">
+                <h4>${item.email}</h4>
+                <p>${item.body}</p>
+            </div>`
+    });
+ */
+
+
+    const template = listado.map(  item => {
+        return `<div class="comentario">
+                    <h4>${item.email}</h4>
+                    <p>${item.body}</p>
+                </div>`
+    })
+
+    console.log(template.join(''));
+
+    areaComentarios.innerHTML = template.join('');
+
 }
