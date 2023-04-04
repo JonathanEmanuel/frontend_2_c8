@@ -13,8 +13,10 @@ window.addEventListener('load', function () {
   const btnCerrarSesion = document.querySelector('#closeApp');
   const formCrearTarea = document.querySelector('.nueva-tarea');
   const userName = document.querySelector('.user-info p');
+  const inputTarea = document.querySelector('#nuevaTarea');
 
   obtenerNombreUsuario();
+  consultarTareas();
   /* -------------------------------------------------------------------------- */
   /*                          FUNCIÓN 1 - Cerrar sesión                         */
   /* -------------------------------------------------------------------------- */
@@ -44,7 +46,7 @@ window.addEventListener('load', function () {
     fetch( endpoint, settings )
     .then(  resp => resp.json() )
     .then( json => {
-        console.log(json);
+        //console.log(json);
         userName.textContent = `${json.firstName}  ${json.lastName} `;
     })
 
@@ -55,10 +57,20 @@ window.addEventListener('load', function () {
   /*                 FUNCIÓN 3 - Obtener listado de tareas [GET]                */
   /* -------------------------------------------------------------------------- */
   function consultarTareas() {
-    
-    
 
-
+    const endpoint = 'https://todo-api.ctd.academy/v1/tasks';
+    const settings = {
+      method: 'GET',
+      headers: {
+        authorization: jwt,
+      }
+    }
+   
+    fetch( endpoint, settings )
+    .then(  resp => resp.json() )
+    .then( json => {
+        renderizarTareas(json);
+    })
 
   };
 
@@ -67,10 +79,35 @@ window.addEventListener('load', function () {
   /*                    FUNCIÓN 4 - Crear nueva tarea [POST]                    */
   /* -------------------------------------------------------------------------- */
   formCrearTarea.addEventListener('submit', function (event) {
-    
+    event.preventDefault();
 
+    const description = inputTarea.value;
+    const completed = false;
 
+    const nuevaTarea = {
+      description,
+      completed
+    }
 
+    inputTarea.value = '';
+    console.log(nuevaTarea);
+
+    const endpoint = 'https://todo-api.ctd.academy/v1/tasks';
+    const settings = {
+      method: 'POST',
+      body:  JSON.stringify( nuevaTarea),
+      headers: {
+        authorization: jwt,
+        'Content-type': 'application/json; charset=UTF-8'
+      }
+    }
+
+    fetch( endpoint, settings )
+    .then(  resp => resp.json() )
+    .then( json => {
+        console.log(json);
+        consultarTareas();
+    })
 
   });
 
@@ -79,9 +116,50 @@ window.addEventListener('load', function () {
   /*                  FUNCIÓN 5 - Renderizar tareas en pantalla                 */
   /* -------------------------------------------------------------------------- */
   function renderizarTareas(listado) {
+    const tareasPendientes = document.querySelector('.tareas-pendientes');
+    const tareasTerminadas = document.querySelector('.tareas-terminadas');
+
+
+    console.log(listado);
+
+    tareasPendientes.innerHTML = '';
+    tareasTerminadas.innerHTML = '';
+
+    listado.forEach(tarea => {
+      const fecha = new Date(tarea.createdAt);
+
+      if( tarea.completed == true ){
+        tareasTerminadas.innerHTML += // html
+          `<li class="tarea">
+              <div class="hecha">
+                <i class="fa-regular fa-circle-check"></i>
+              </div>
+              <div class="descripcion">
+                <p class="nombre"> ${tarea.description}</p>
+                <div class="cambios-estados">
+                  <button class="change incompleta" id="${tarea.id}" ><i class="fa-solid fa-rotate-left"></i></button>
+                  <button class="borrar" id="${tarea.id}"><i class="fa-regular fa-trash-can"></i></button>
+                </div>
+              </div>
+            </li>`;
+
+      } else {
+
+        tareasPendientes.innerHTML += // html
+          `<li class="tarea">
+            <button class="change" id="${tarea.id}"><i class="fa-regular fa-circle"></i></button>
+            <div class="descripcion">
+              <p class="nombre"> ${tarea.description} </p>
+              <p class="timestamp"> ${fecha.toLocaleDateString()}</p>
+            </div>
+          </li>`;
+      }
 
 
 
+
+
+    });
 
 
 
