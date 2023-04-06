@@ -90,7 +90,7 @@ window.addEventListener('load', function () {
     }
 
     inputTarea.value = '';
-    console.log(nuevaTarea);
+
 
     const endpoint = 'https://todo-api.ctd.academy/v1/tasks';
     const settings = {
@@ -119,12 +119,10 @@ window.addEventListener('load', function () {
     const tareasPendientes = document.querySelector('.tareas-pendientes');
     const tareasTerminadas = document.querySelector('.tareas-terminadas');
 
-
-    console.log(listado);
-
+    //console.log(listado);
     tareasPendientes.innerHTML = '';
     tareasTerminadas.innerHTML = '';
-
+    // Creamos los elemento en el DOM
     listado.forEach(tarea => {
       const fecha = new Date(tarea.createdAt);
 
@@ -144,7 +142,6 @@ window.addEventListener('load', function () {
             </li>`;
 
       } else {
-
         tareasPendientes.innerHTML += // html
           `<li class="tarea">
             <button class="change" id="${tarea.id}"><i class="fa-regular fa-circle"></i></button>
@@ -154,24 +151,49 @@ window.addEventListener('load', function () {
             </div>
           </li>`;
       }
-
-
-
-
-
     });
 
-
-
-
+    // Seleccionar los btn y agregamos un eventListener
+    botonesCambioEstado();
+    
   };
 
   /* -------------------------------------------------------------------------- */
   /*                  FUNCIÓN 6 - Cambiar estado de tarea [PUT]                 */
   /* -------------------------------------------------------------------------- */
   function botonesCambioEstado() {
+    const botones = document.querySelectorAll('.change');
     
-    
+    botones.forEach(btn => {
+      btn.addEventListener('click', function(evento){
+        //console.log('Se hizo click', evento.target);
+                                        // contains('incompleta') retorna un true o false
+        const terminada = evento.target.classList.contains('incompleta');
+        const id = evento.target.id;
+        const endpoint = 'https://todo-api.ctd.academy/v1/tasks/'+id;
+        const datos = {
+          completed: !terminada
+        }
+
+        const config = {
+          method: 'PUT',
+          body:  JSON.stringify( datos),
+          headers: {
+            authorization: jwt,
+            'Content-type': 'application/json; charset=UTF-8'
+          }
+        }
+      
+        fetch(endpoint, config)
+        .then( response => response.json())
+        .then( json => {
+          console.log(json);
+          consultarTareas();
+        })
+
+
+      })
+    });
 
 
 
@@ -185,7 +207,7 @@ window.addEventListener('load', function () {
    
     
 
-    
+
 
   };
 
