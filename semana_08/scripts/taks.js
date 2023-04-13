@@ -47,7 +47,7 @@ window.addEventListener('load', function () {
     .then(  resp => resp.json() )
     .then( json => {
         //console.log(json);
-        userName.textContent = `${json.firstName}  ${json.lastName} `;
+        userName.innerText = `${json.firstName}  ${json.lastName} `;
     })
 
   };
